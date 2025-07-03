@@ -176,6 +176,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 8px;
+            cursor: pointer; /* Indicate clickable media */
         }
         .media-placeholder-text {
             position: absolute;
@@ -229,6 +230,66 @@
             text-align: right;
             font-family: 'Jameel Noori Nastaleeq', 'Noto Sans Urdu', sans-serif; /* Prioritize Nastaleeq if available */
         }
+
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content img,
+        .lightbox-content video {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .lightbox-close:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -242,7 +303,7 @@
 
             <!-- School Logo -->
             <div class="media-placeholder w-32 h-32 mx-auto mt-6" style="background-color: #fff; border-color: var(--accent-blue);">
-                <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/306129016_550220590240931_518721742923532173_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iG7E-eWdx2gQ7kNvwG1-lmF&_nc_oc=AdmGh2Y27A3Xo678AZi25I1p82G7qEcIJ2HOQtaIRGu2zPJPfLFBHOku4JKEtJvsHMvULsw2_7_3ntUkMI5JizbO&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=NlR1dGF5WHpDiAtcwD15zw&oh=00_AfO4ZQ0MFrNvCkay4upIUTgtLulz1RUlWQntmEhS-7h9Ig&oe=686C54EC" alt="Muhammadia Girls High School Logo">
+                <img src="https://scontent.flhe5-1.fna.fbcdn.net/v/t39.30808-6/306129016_550220590240931_518721742923532173_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iG7E-eWdx2gQ7kNvwG1-lmF&_nc_oc=AdmGh2Y27A3Xo678AZi25I1p82G7qEcIJ2HOQtaIRGu2zPJPfLFBHOku4JKEtJvsHMvULsw2_7_3ntUkMI5JizbO&_nc_zt=23&_nc_ht=scontent.flhe5-1.fna&_nc_gid=NlR1dGF5WHpDiAtcwD15zw&oh=00_AfO4ZQ0MFrNvCkay4upIUTgtLulz1RUlWQntmEhS-7h9Ig&oe=686C54EC" alt="Muhammadia Girls High School Logo" class="lightbox-media">
                 <span class="media-placeholder-text">School Logo</span>
             </div>
         </header>
@@ -264,7 +325,7 @@
                 </div>
                 <div class="media-placeholder h-64" style="background-color: #bbdefb; border-color: var(--accent-blue);">
                     <!-- Happy Students in Class Image -->
-                    <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Happy Students in Class.png" alt="Happy students in class">
+                    <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Happy Students in Class.png" alt="Happy students in class" class="lightbox-media">
                     <span class="media-placeholder-text">Happy students in class</span>
                 </div>
             </div>
@@ -291,7 +352,7 @@
                     <p class="urdu-text text-sm">اب بھی بلیک بورڈ اور چاک کا استعمال۔ کئی سالوں سے کوئی دیکھ بھال یا پینٹ نہیں۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Image: Outdated Classroom State -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Outdated Classroom State.png" alt="Outdated classroom state">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Outdated Classroom State.png" alt="Outdated classroom state" class="lightbox-media">
                         <span class="media-placeholder-text">Outdated classroom state</span>
                     </div>
                 </div>
@@ -312,7 +373,7 @@
                     <p class="urdu-text text-sm">چھتیں بارش میں جھک رہی ہیں۔ عمارت تباہی کے دہانے پر ہے۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Video: Dilapidated Building Structure -->
-                        <video src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Dilapidated Building Structure.mp4" controls muted loop playsinline></video>
+                        <video src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Dilapidated Building Structure.mp4" controls muted loop playsinline class="lightbox-media"></video>
                         <span class="media-placeholder-text">Dilapidated building structure</span>
                     </div>
                 </div>
@@ -335,7 +396,7 @@
                     <p class="urdu-text text-sm">پرانی بجلی کی لائٹیں اور وائرنگ۔ جنریٹر ناکارہ ہے۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Image: Aging Electrical Infrastructure -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Aging Electrical Infrastructure.jpg" alt="Aging Electrical Infrastructure">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Aging Electrical Infrastructure.jpg" alt="Aging Electrical Infrastructure" class="lightbox-media">
                         <span class="media-placeholder-text">Aging electrical infrastructure</span>
                     </div>
                 </div>
@@ -352,7 +413,7 @@
                     <p class="urdu-text text-sm">فرنیچر تقریباً ۴۰ سال پرانا ہے، اسے اپ گریڈ کرنے کی ضرورت ہے۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Image: Worn-out School Furniture -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Worn-out School Furniture.jpg" alt="Worn-out School Furniture">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Worn-out School Furniture.jpg" alt="Worn-out School Furniture" class="lightbox-media">
                         <span class="media-placeholder-text">Worn-out school furniture</span>
                     </div>
                 </div>
@@ -374,7 +435,7 @@
                     <p class="urdu-text text-sm">بچوں کی تعلیم کے لیے جدید آلات اور کھلونوں کی کمی۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Image: Basic Montessori Class (Lacking Tools) -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Basic Montessori Class (Lacking Tools).jpg" alt="Basic Montessori Class (Lacking Tools)">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Basic Montessori Class (Lacking Tools).jpg" alt="Basic Montessori Class (Lacking Tools)" class="lightbox-media">
                         <span class="media-placeholder-text">Basic Montessori class (lacking tools)</span>
                     </div>
                 </div>
@@ -392,7 +453,7 @@
                     <p class="urdu-text text-sm">یوٹیلیٹی کے زیادہ نرخ اور غیر ضروری فیسیں۔ پنجاب فاؤنڈیشن نے مدد نہیں کی۔</p>
                     <div class="media-placeholder w-full h-32 mt-4" style="background-color: #ef9a9a; border-color: var(--red-alert);">
                         <!-- Image: Financial Burden (Bills:Infrastructure) -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Financial Burden (Bills:Infrastructure).jpg" alt="Financial Burden (Bills:Infrastructure)">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Financial Burden (Bills:Infrastructure).jpg" alt="Financial Burden (Bills:Infrastructure)" class="lightbox-media">
                         <span class="media-placeholder-text">Financial burden (bills/infrastructure)</span>
                     </div>
                 </div>
@@ -420,7 +481,7 @@
                     <p class="urdu-text text-sm mb-4">آپ کی مدد سے ہم پرانے بلیک بورڈز کو جدید وائٹ بورڈز سے بدل سکیں گے، سکول کو نیا پینٹ کروا سکیں گے، اور محفوظ بجلی کی وائرنگ اور فعال جنریٹر کو یقینی بنا سکیں گے۔</p>
                     <div class="media-placeholder w-full h-48" style="background-color: #a5d6a7; border-color: var(--green-success);">
                         <!-- Image: Modern & Safe Classroom Concept -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Modern & Safe Classroom Concept.jpg" alt="Modern & Safe Classroom Concept">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Modern & Safe Classroom Concept.jpg" alt="Modern & Safe Classroom Concept" class="lightbox-media">
                         <span class="media-placeholder-text">Modern & safe classroom concept</span>
                     </div>
                 </div>
@@ -438,14 +499,14 @@
                     <p class="urdu-text text-sm mb-4">فنڈز نئے، آرام دہ فرنیچر، مکمل فعال سائنس اور کمپیوٹر لیبز، ایک مکمل لائبریری، اور مونٹیسوری کلاسز کے لیے جدید ترین تعلیمی آلات فراہم کریں گے۔</p>
                     <div class="media-placeholder w-full h-48" style="background-color: #a5d6a7; border-color: var(--green-success);">
                         <!-- Image: Children Engaged with New Learning Tools -->
-                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Children Engaged with New Learning Tools.png" alt="Children Engaged with New Learning Tools">
+                        <img src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/Children Engaged with New Learning Tools.png" alt="Children Engaged with New Learning Tools" class="lightbox-media">
                         <span class="media-placeholder-text">Children engaged with new learning tools</span>
                     </div>
                 </div>
             </div>
             <div class="media-placeholder w-full h-64 mt-8" style="background-color: #a5d6a7; border-color: var(--green-success);">
                 <!-- Video: School Transformation Story -->
-                <video src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/School Transformation Story.mp4" controls muted loop playsinline></video>
+                <video src="https://raw.githubusercontent.com/usmanilm/mghs/refs/heads/main/img/School Transformation Story.mp4" controls muted loop playsinline class="lightbox-media"></video>
                 <span class="media-placeholder-text">School transformation story video</span>
             </div>
         </section>
@@ -464,7 +525,7 @@
                 <p>For a visual overview of our current situation, please scan the QR code below (for physical brochure) or visit our website (for digital).</p>
                 <p class="urdu-text">ہماری موجودہ صورتحال کے بصری جائزہ کے لیے، براہ کرم نیچے دیے گئے QR کوڈ کو سکین کریں (فزیکل بروشر کے لیے) یا ہماری ویب سائٹ ملاحظہ کریں (ڈیجیٹل کے لیے)۔</p>
                 <div class="media-placeholder w-24 h-24 mx-auto mt-4" style="background-color: #fff; border-color: var(--accent-blue);">
-                    <img src="https://placehold.co/96x96/ffffff/000000?text=QR%0ACode" alt="QR Code Placeholder">
+                    <img src="https://placehold.co/96x96/ffffff/000000?text=QR%0ACode" alt="QR Code Placeholder" class="lightbox-media">
                     <span class="media-placeholder-text text-black" style="background-color: rgba(255,255,255,0.75);">Actual QR code here</span>
                 </div>
                 <p class="mt-2">Or visit: <a href="https://www.yourcharitywebsite.org/donate" target="_blank" class="hover:underline" style="color: var(--secondary-green);">www.yourcharitywebsite.org/donate</a></p>
@@ -485,6 +546,15 @@
                 <a href="#" class="hover:text-blue-100" style="color: var(--accent-blue);">Instagram</a>
             </div>
         </footer>
+    </div>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay" class="lightbox-overlay">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-image" src="" alt="Lightbox Image" style="display: none;">
+            <video id="lightbox-video" src="" controls style="display: none;"></video>
+        </div>
     </div>
 
     <script>
@@ -527,6 +597,45 @@
         document.querySelector('.btn-donate').addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default link behavior
             showMessageBox('Thank you for your interest! Please visit our website or use the QR code for donation details.');
+        });
+
+        // Lightbox functionality
+        const lightboxOverlay = document.getElementById('lightbox-overlay');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxVideo = document.getElementById('lightbox-video');
+        const mediaElements = document.querySelectorAll('.lightbox-media');
+
+        mediaElements.forEach(media => {
+            media.addEventListener('click', () => {
+                openLightbox(media.tagName.toLowerCase(), media.src);
+            });
+        });
+
+        function openLightbox(type, src) {
+            lightboxImage.style.display = 'none';
+            lightboxVideo.style.display = 'none';
+
+            if (type === 'img') {
+                lightboxImage.src = src;
+                lightboxImage.style.display = 'block';
+            } else if (type === 'video') {
+                lightboxVideo.src = src;
+                lightboxVideo.style.display = 'block';
+                lightboxVideo.play(); // Autoplay video when opened
+            }
+            lightboxOverlay.classList.add('active');
+        }
+
+        function closeLightbox() {
+            lightboxVideo.pause(); // Pause video when closing
+            lightboxOverlay.classList.remove('active');
+        }
+
+        // Close lightbox when clicking outside content
+        lightboxOverlay.addEventListener('click', (e) => {
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
         });
     </script>
 </body>
